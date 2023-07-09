@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from artists.models import Artist
 
 class User(models.Model):
     REGULAR = 'Regular'
@@ -18,3 +19,9 @@ class User(models.Model):
     def __str__(self):
         return self.name
 
+class Follower(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user.name} follows {self.artist.name}"
