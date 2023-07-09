@@ -27,4 +27,5 @@ urlpatterns = [
     path('likes/', include('likes.urls')),
     path('payments/', include('payments.urls')),
     path('user_songs/', include('user_songs.urls')),
+    path('subscriptions/', include('subscriptions.urls')),
 ]
