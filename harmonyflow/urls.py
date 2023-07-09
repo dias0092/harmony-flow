@@ -25,4 +25,5 @@ urlpatterns = [
     path('tracks/', include('tracks.urls')),
     path('followers/', include('followers.urls')),
     path('likes/', include('likes.urls')),
+    path('payments/', include('payments.urls')),
 ]
