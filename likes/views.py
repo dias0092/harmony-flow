@@ -14,7 +14,9 @@ def like_new(request):
     if request.method == "POST":
         form = LikeForm(request.POST)
         if form.is_valid():
-            like = form.save()
+            like = form.save(commit=False)
+            like.user = request.user
+            like.save()
             return redirect('like_detail', pk=like.pk)
     else:
         form = LikeForm()
