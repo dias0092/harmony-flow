@@ -1,0 +1,7 @@
+{% block content %}
+  <h1>{{ album.name }}</h1>
+  <p>By: {{ album.artist.name }}</p>
+  <p>Release Date: {{ album.release_date }}</p>
+  <a href="{% url 'albums:album_edit' album.id %}">Edit Album</a>
+  <a href="{% url 'albums:album_delete' album.id %}">Delete Album</a>
+{% endblock %}

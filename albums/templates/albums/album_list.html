@@ -1,0 +1,9 @@
+{% block content %}
+  <h1>Albums</h1>
+  {% for album in albums %}
+    <h2><a href="{% url 'albums:album_detail' album.id %}">{{ album.name }}</a></h2>
+    <p>By: {{ album.artist.name }}</p>
+    <p>Release Date: {{ album.release_date }}</p>
+  {% endfor %}
+  <a href="{% url 'albums:album_new' %}">Add a new Album</a>
+{% endblock %}
