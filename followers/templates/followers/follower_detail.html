@@ -1,0 +1,6 @@
+{% block content %}
+  <h1>Details for Follower</h1>
+  <p>{{ follower.user.username }} follows {{ follower.artist.name }}</p>
+  <a href="{% url 'followers:follower_edit' follower.id %}">Edit</a> |
+  <a href="{% url 'followers:follower_delete' follower.id %}">Delete</a>
+{% endblock %}
