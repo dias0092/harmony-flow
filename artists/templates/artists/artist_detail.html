@@ -1,0 +1,5 @@
+{% block content %}
+  <h1>{{ artist.name }}</h1>
+  <a href="{% url 'artists:artist_edit' artist.pk %}">Edit</a>
+  <a href="{% url 'artists:artist_delete' artist.pk %}">Delete</a>
+{% endblock %}

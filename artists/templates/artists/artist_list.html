@@ -1,0 +1,12 @@
+{% block content %}
+  <h1>Artists</h1>
+  <ul>
+    {% for artist in artists %}
+      <li>
+        <a href="{% url 'artists:artist_detail' artist.pk %}">{{ artist.name }}</a>
+      </li>
+    {% empty %}
+      <li>No artists available.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
