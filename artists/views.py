@@ -4,7 +4,7 @@ from .forms import ArtistForm
 
 def artist_list(request):
     artists = Artist.objects.all()
-    return render[request, 'artists/artist_list.html' , {'artists':artists}]
+    return render(request, 'artists/artist_list.html' , {'artists':artists})
 
 def artist_detail(request, pk):
     artist = get_object_or_404(Artist, pk = pk)
@@ -38,4 +38,4 @@ def artist_delete(request, pk):
     if request.method == "POST":
         artist.delete()
         return redirect('artist_list')
-    return render(request, 'artists/artist_confirm_delete.html', {'artist':artist})
+    return render(request, 'artists/artist_delete.html', {'artist':artist})
