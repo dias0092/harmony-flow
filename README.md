@@ -22,21 +22,21 @@ git clone https://github.com/yourusername/harmony-flow.git
 
 Navigate into the project directory:
 
-    ```bash
+    
     cd harmony-flow
-    ```
+    
     
 Run the Django migrations to create your database schema:
 
-    ```bash
+    
     python manage.py migrate
-    ```
+    
 
 Start the Django development server:
 
-    ```bash
+    
     python manage.py runserver
-    ```
+    
 
 You should now be able to open your browser and navigate to `http://localhost:8000` to view the application.
 
