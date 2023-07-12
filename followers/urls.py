@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+app_name='followers'
+
 urlpatterns = [
     path('', views.follower_list, name='follower_list'),
     path('follower/<int:pk>/', views.follower_detail, name='follower_detail'),

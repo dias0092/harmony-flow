@@ -36,4 +36,4 @@ def follower_delete(request, pk):
     if request.method == 'POST':
         follower.delete()
         return redirect('follower_list')
-    return render(request, 'followers/follower_confirm_delete.html', {'follower': follower})
+    return render(request, 'followers/follower_delete.html', {'follower': follower})
