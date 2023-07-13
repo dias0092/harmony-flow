@@ -36,4 +36,4 @@ def track_delete(request, pk):
     if request.method == 'POST':
         track.delete()
         return redirect('track_list')
-    return render(request, 'tracks/track_confirm_delete.html', {'track': track})
+    return render(request, 'tracks/track_delete.html', {'track': track})
