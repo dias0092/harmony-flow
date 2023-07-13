@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Tracks</h1>
+
+<ul>
+    {% for track in tracks %}
+    <li>
+        <a href="{% url 'tracks:track_detail' track.pk %}">{{ track.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'tracks:track_new' %}">New Track</a>
+{% endblock %}
