@@ -10,10 +10,10 @@
     <header class="p-5 bg-white shadow">
         <nav>
             <ul class="flex space-x-4">
-                <li><a href="{% url 'artists' %}" class="hover:text-blue-500">Artists</a></li>
-                <li><a href="{% url 'albums' %}" class="hover:text-blue-500">Albums</a></li>
-                <li><a href="{% url 'tracks' %}" class="hover:text-blue-500">Tracks</a></li>
-                <li><a href="{% url 'playlists' %}" class="hover:text-blue-500">Playlists</a></li>
+                <li><a href="{% url 'artists:artist_list' %}" class="hover:text-blue-500">Artists</a></li>
+                <li><a href="{% url 'albums:album_list' %}" class="hover:text-blue-500">Albums</a></li>
+                <li><a href="{% url 'tracks:track_list' %}" class="hover:text-blue-500">Tracks</a></li>
+                <li><a href="{% url 'playlists:playlist_list' %}" class="hover:text-blue-500">Playlists</a></li>
             </ul>
         </nav>
     </header>
