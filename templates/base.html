@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Harmony Flow Music Platform{% endblock %}</title>
+    <link href="{% static 'css/tailwind.css' %}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-700">
+    <header class="p-5 bg-white shadow">
+        <nav>
+            <ul class="flex space-x-4">
+                <li><a href="{% url 'artists' %}" class="hover:text-blue-500">Artists</a></li>
+                <li><a href="{% url 'albums' %}" class="hover:text-blue-500">Albums</a></li>
+                <li><a href="{% url 'tracks' %}" class="hover:text-blue-500">Tracks</a></li>
+                <li><a href="{% url 'playlists' %}" class="hover:text-blue-500">Playlists</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="p-5">
+        {% block content %}
+       
+        {% endblock %}
+    </main>
+    <footer class="p-5 mt-5 bg-white shadow">
+        <p class="text-center">&copy; 2023 Harmony Flow Music Platform</p>
+    </footer>
+</body>
+</html>

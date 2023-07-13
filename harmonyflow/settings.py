@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'subscriptions',
     'tracks',
     'user_songs',
-    'users'
+    'users',
+    'core',
 ]
 
 MIDDLEWARE = [
