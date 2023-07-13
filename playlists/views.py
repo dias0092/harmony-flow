@@ -16,7 +16,7 @@ def playlist_new(request):
         if form.is_valid():
             playlist = form.save(commit=False)
             playlist.save()
-            return redirect('playlist_detail', pk=playlist.pk)
+            return redirect('playlists:playlist_detail', pk=playlist.pk)
     else:
         form = PlaylistForm()
     return render(request, 'playlists/playlist_edit.html', {'form': form})
@@ -28,7 +28,7 @@ def playlist_edit(request, pk):
         if form.is_valid():
             playlist = form.save(commit=False)
             playlist.save()
-            return redirect('playlist_detail', pk=playlist.pk)
+            return redirect('playlists:playlist_detail', pk=playlist.pk)
     else:
         form = PlaylistForm(instance=playlist)
     return render(request, 'playlists/playlist_edit.html', {'form': form})
@@ -37,5 +37,5 @@ def playlist_delete(request, pk):
     playlist = get_object_or_404(Playlist, pk=pk)
     if request.method == "POST":
         playlist.delete()
-        return redirect('playlist_list')
-    return render(request, 'playlists/playlist_confirm_delete.html', {'playlist': playlist})
+        return redirect('playlists:playlist_list')
+    return render(request, 'playlists/playlist_delete.html', {'playlist': playlist})

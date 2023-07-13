@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Playlists</h1>
+    {% for playlist in playlists %}
+        <h2><a href="{% url 'playlists:playlist_detail' pk=playlist.pk %}">{{ playlist.name }}</a></h2>
+    {% endfor %}
+
+    <a href="{% url 'playlists:playlist_new' %}">New Playlist</a>
+{% endblock %}

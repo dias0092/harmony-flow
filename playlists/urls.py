@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import playlist_list, playlist_detail, playlist_new, playlist_edit, playlist_delete
 
+app_name='playlists'
+
 urlpatterns = [
     path('', playlist_list, name='playlist_list'),
     path('<int:pk>/', playlist_detail, name='playlist_detail'),
