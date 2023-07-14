@@ -27,7 +27,7 @@ These instructions will get you a copy of the project up and running on your loc
 1. To get started, clone this repository to your local machine.
 
     ```bash
-    git clone https://github.com/yourusername/harmony-flow.git
+    git clone https://github.com/dias0092/harmony-flow.git
     ```
 
 2. Navigate into the project directory:
