@@ -1,5 +1,13 @@
+{% extends 'base_generic.html' %}
+
 {% block content %}
-  <h1>{{ artist.name }}</h1>
-  <a href="{% url 'artists:artist_edit' artist.pk %}">Edit</a>
-  <a href="{% url 'artists:artist_delete' artist.pk %}">Delete</a>
+<div class="bg-white shadow rounded p-4">
+    <h1 class="text-4xl font-bold mb-4">{{ artist.name }}</h1>
+    {% if artist.photo %}
+    <img src="{{ artist.photo.url }}" alt="{{ artist.name }}" class="w-full object-cover rounded mb-4">
+    {% endif %}
+    <p class="text-lg mb-4">{{ artist.biography }}</p>
+    <a href="{% url 'artists:artist_edit' artist.id %}" class="text-blue-500 hover:underline">Edit</a>
+    <a href="{% url 'artists:artist_delete' artist.id %}" class="text-red-500 hover:underline">Delete</a>
+</div>
 {% endblock %}
