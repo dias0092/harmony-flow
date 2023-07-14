@@ -1,9 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %} Albums - HarmonyFlow {% endblock %}
+
 {% block content %}
-  <h1>Albums</h1>
-  {% for album in albums %}
-    <h2><a href="{% url 'albums:album_detail' album.id %}">{{ album.name }}</a></h2>
-    <p>By: {{ album.artist.name }}</p>
-    <p>Release Date: {{ album.release_date }}</p>
+<div class="container mx-auto py-10">
+  <h2 class="text-8xl font-bold mb-5 text-center">Albums</h2>
+
+  <div class="mb-4 text-right bg-gray-900">
+    <a href="{% url 'albums:album_new' %}" class="bg-gray-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">New Album</a>
+  </div>
+
+  {% for album in object_list %}
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <h3 class="font-bold text-xl mb-2">{{ album.title }}</h3>
+      <p class="text-gray-700 text-base">{{ album.description }}</p>
+      <div class="mt-4">
+          <a href="{% url 'albums:album_edit' album.id %}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+          <a href="{% url 'albums:album_delete' album.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</a>
+      </div>
+  </div>
+  {% empty %}
+  <p>No albums yet.</p>
   {% endfor %}
-  <a href="{% url 'albums:album_new' %}">Add a new Album</a>
+</div>
 {% endblock %}

@@ -1,7 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %} {{ album.name }} - HarmonyFlow {% endblock %}
+
 {% block content %}
-  <h1>{{ album.name }}</h1>
-  <p>By: {{ album.artist.name }}</p>
-  <p>Release Date: {{ album.release_date }}</p>
-  <a href="{% url 'albums:album_edit' album.id %}">Edit Album</a>
-  <a href="{% url 'albums:album_delete' album.id %}">Delete Album</a>
+<div class="container mx-auto py-10">
+    <div class="bg-white shadow-lg rounded-lg p-8">
+        <h2 class="prose text-4xl font-bold mb-5 text-center text-gray-800">{{ album.name }}</h2>
+
+        <div class="mt-4 text-center">
+            <p class="text-xl text-gray-600">{{ album.artist }}</p>
+            <p class="mt-4 text-sm text-gray-500">{{ album.description }}</p>
+
+            <div class="mt-8">
+                <h3 class="text-2xl font-semibold text-gray-800">Tracks:</h3>
+                <ul class="list-disc list-inside text-gray-600">
+                {% for track in album.tracks.all %}
+                    <li class="mt-2">{{ track.name }} - {{ track.duration }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
