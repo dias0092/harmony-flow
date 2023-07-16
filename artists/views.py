@@ -16,7 +16,7 @@ def artist_new(request):
         if form.is_valid():
             artist = form.save(commit=False)
             artist.save()
-            return redirect('artist_detail', pk=artist.pk)
+            return redirect('artists:artist_detail', pk=artist.pk)
     else:
         form = ArtistForm()
     return render(request, 'artists/artist_edit.html', {'form': form})
@@ -28,7 +28,7 @@ def artist_edit(request, pk):
         if form.is_valid():
             artist = form.save(commit=False)
             artist.save()
-            return redirect('artist_detail', pk=artist.pk)
+            return redirect('artists:artist_detail', pk=artist.pk)
     else:
         form = ArtistForm(instance=artist)
     return render(request, 'artists/artist_edit.html', {'form': form})
@@ -37,5 +37,5 @@ def artist_delete(request, pk):
     artist = get_object_or_404(Artist, pk=pk)
     if request.method == "POST":
         artist.delete()
-        return redirect('artist_list')
+        return redirect('artists:artist_list')
     return render(request, 'artists/artist_delete.html', {'artist':artist})

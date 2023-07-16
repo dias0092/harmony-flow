@@ -1,16 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="text-4xl font-bold mb-4">Artists</h1>
-<div class="grid grid-cols-3 gap-4">
-    {% for artist in artist_list %}
-    <div class="bg-white shadow rounded p-4">
+<div class="container mx-auto py-10">
+  <h1 class="text-6xl font-bold mb-5 text-center">Artists</h1>
+  <div class="mb-4 text-left">
+    <a href="{% url 'artists:artist_new' %}" class="bg-gray-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add New Artist</a>
+  </div>
+    {% for artist in artists %}
+      <div class="bg-white shadow rounded p-4">
         <h2 class="font-bold text-xl mb-2">{{ artist.name }}</h2>
         {% if artist.photo %}
-        <img src="{{ artist.photo.url }}" alt="{{ artist.name }}" class="w-full object-cover rounded">
+          <img src="{{ artist.photo.url }}" alt="{{ artist.name }}" class="w-full object-cover rounded">
         {% endif %}
         <a href="{% url 'artists:artist_detail' artist.id %}" class="text-blue-500 hover:underline">View</a>
-    </div>
+      </div>
+    {% empty %}
+      <div class="bg-white shadow rounded p-4">
+        <p>No artists found.</p>
+      </div>
     {% endfor %}
 </div>
 {% endblock %}

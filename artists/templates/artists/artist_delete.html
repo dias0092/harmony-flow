@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="text-4xl font-bold mb-4">Delete Artist</h1>
-<div class="bg-white shadow rounded p-4">
+  <h1 class="text-4xl font-bold mb-4">Delete Artist</h1>
+  <div class="bg-white shadow rounded p-4">
     <form method="post">
-        {% csrf_token %}
-        <p>Are you sure you want to delete "{{ artist }}"?</p>
-        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="submit">Yes, delete</button>
-        <a href="{% url 'artists:artist_detail' artist.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cancel</a>
+      {% csrf_token %}
+      <p>Are you sure you want to delete "{{ artist }}"?</p>
+      <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="submit">Yes, delete</button>
+      <a href="{% url 'artists:artist_detail' artist.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cancel</a>
     </form>
-</div>
+  </div>
 {% endblock %}
