@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Album
 from .forms import AlbumForm
+from .models import Artist
 
 def album_list(request):
     albums = Album.objects.all()
@@ -16,10 +17,11 @@ def album_new(request):
         if form.is_valid():
             album = form.save(commit=False)
             album.save()
-            return redirect('album_detail', pk=album.pk)
+            return redirect('albums:album_detail', pk=album.pk)
     else:
         form = AlbumForm()
-    return render(request, 'albums/album_edit.html', {'form': form})
+    artists = Artist.objects.all()
+    return render(request, 'albums/album_new.html', {'form': form, 'artists': artists})
 
 def album_edit(request, pk):
     album = get_object_or_404(Album, pk=pk)
@@ -28,7 +30,7 @@ def album_edit(request, pk):
         if form.is_valid():
             album = form.save(commit=False)
             album.save()
-            return redirect('album_detail', pk=album.pk)
+            return redirect('albums:album_detail', pk=album.pk)
     else:
         form = AlbumForm(instance=album)
     return render(request, 'albums/album_edit.html', {'form': form})
@@ -37,5 +39,5 @@ def album_delete(request, pk):
     album = get_object_or_404(Album, pk=pk)
     if request.method == "POST":
         album.delete()
-        return redirect('album_list')
+        return redirect('albums:album_list')
     return render(request, 'albums/album_delete.html', {'album': album})
