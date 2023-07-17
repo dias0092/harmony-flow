@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="w-full max-w-xs mx-auto mt-20">
+<div class="w-full max-w-sm mx-auto mt-20">
     <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         {% csrf_token %}
         <div class="mb-4">
@@ -14,7 +14,20 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="id_password">
                 Password
             </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="id_password" name="password" type="password" required>
+            <input class="shadow appearance-none border mb-4 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="id_password" name="password" type="password" required>
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger text-xs text-red-500 mb-4">
+                <strong>Error:</strong> Incorrect username or password.
+            </div>
+            {% else %}
+                {% for field in form %}
+                    {% if field.errors %}
+                        <div class="alert alert-danger text-xs text-red-500 mb-4">
+                            <strong>{{ field.label }}:</strong> {{ field.errors.0|escape }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
         </div>
         <div class="flex items-center justify-between">
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">

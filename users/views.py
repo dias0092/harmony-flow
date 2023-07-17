@@ -51,7 +51,7 @@ def register_view(request):
             print(user)
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}!')
-            return redirect('users:login')
+            return redirect('home')
         else:
             print(form.errors)
     else:
@@ -68,7 +68,7 @@ def login_view(request):
             user = authenticate(username=username, password = password)
             if user is not None:
                 login(request, user)
-                return redirect('users:user_list')
+                return redirect('home')
             else:
                 messages.error(request, 'Invalid username or password.')
     else:
