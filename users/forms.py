@@ -15,4 +15,4 @@ class UserLoginForm(AuthenticationForm):
 class UserRegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = UserCreationForm.Meta.fields + ('email', 'date_of_birth', 'profile_image', 'user_type',)
+        fields = UserCreationForm.Meta.fields + ('email', 'date_of_birth', 'profile_image',)

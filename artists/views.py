@@ -19,7 +19,7 @@ def artist_new(request):
             return redirect('artists:artist_detail', pk=artist.pk)
     else:
         form = ArtistForm()
-    return render(request, 'artists/artist_edit.html', {'form': form})
+    return render(request, 'artists/artist_new.html', {'form': form})
 
 def artist_edit(request, pk):
     artist = get_object_or_404(Artist, pk=pk)

@@ -47,12 +47,16 @@ def register_view(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            print(user)
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}!')
             return redirect('users:login')
+        else:
+            print(form.errors)
     else:
         form = UserRegisterForm()
+    
     return render(request, 'users/register.html', {'form':form})
 
 def login_view(request):

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="w-full max-w-xs mx-auto mt-20">
+<div class="w-full max-w-sm mx-auto mt-20">
     <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         {% csrf_token %}
         <div class="mb-4">
@@ -28,13 +28,29 @@
             </label>
             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="id_password2" name="password2" type="password" required>
         </div>
+        {% if form.errors %}
+        <div class="alert alert-danger text-xs text-red-500 mb-4">
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li><strong>{{ field.label }}:</strong> {{ error|escape }}</li>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li><strong>Non-field error:</strong> {{ error|escape }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
         <div class="flex items-center justify-between">
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                 Sign Up
             </button>
+        </div>
+        <div class="mt-4 text-center">
             <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="{% url 'users:login' %}">
                 Already have an account?
-            </a>
+            </a>   
         </div>
     </form>
 </div>
