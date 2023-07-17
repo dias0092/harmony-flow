@@ -1,10 +1,36 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
-  <h2>Edit User</h2>
-  <form method="POST">
+
+<div class="w-full max-w-xs m-auto mt-20">
+  <h2 class="text-4xl font-bold mb-5 text-center">Edit User</h2>
+  <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save changes</button>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="id_username">Username:</label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="id_username" type="text" placeholder="Username" name="username" value="{{ form.username.value }}">
+      {{ form.username.errors }}
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="id_email">Email:</label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="id_email" type="email" placeholder="Email" name="email" value="{{ form.email.value }}">
+      {{ form.email.errors }}
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="id_date_of_birth">Date of Birth:</label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="id_date_of_birth" type="date" placeholder="Date of Birth" name="date_of_birth" value="{{ form.date_of_birth.value|date:'Y-m-d' }}">
+      {{ form.date_of_birth.errors }}
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="id_profile_image">Profile Image:</label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="id_profile_image" type="file" placeholder="Profile Image" name="profile_image" accept="image/png, image/jpeg">
+      {{ form.profile_image.errors }}
+    </div>
+    <div class="flex items-center justify-between">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Save changes</button>
+    </div>
   </form>
+</div>
 {% endblock %}

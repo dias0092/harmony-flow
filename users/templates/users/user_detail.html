@@ -1,5 +1,63 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-  <h2>User: {{ user.username }}</h2>
+<div class="container mx-auto my-5 p-5">
+    <div class="md:flex no-wrap md:-mx-2 ">
+        <!-- Left Side -->
+        <div class="w-full md:w-3/12 md:mx-2">
+            <!-- Profile Card -->
+            <div class="bg-white p-3 border-t-4">
+                <div class="image overflow-hidden">
+                    {% if user.profile.avatar %}
+                        <img class="h-auto w-full mx-auto" src="{{ user.profile.avatar.url }}" alt="{{ user.username }}'s avatar">
+                    {% else %}
+                        <img class="h-auto w-full mx-auto" src="{% static 'img/default-avatar.png' %}" alt="default avatar">
+                    {% endif %}
+                </div>
+                <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{ user.username }}</h1>
+                
+                <ul class="bg-gray-100 rounded-lg p-2 leading-normal">
+                    <li class="flex items-center">
+                        <span class="text-gray-500 font-bold">Member since: </span>
+                        <span class="ml-2 text-gray-600">{{ user.date_joined|date:"F Y" }}</span>
+                    </li>
+                    <li class="flex items-center mt-2">
+                        <span class="text-gray-500 font-bold">Email:</span>
+                        <span class="ml-2 text-gray-600">{{ user.email }}</span>
+                    </li>
+                    <li class="flex items-center mt-2">
+                        <span class="text-gray-500 font-bold">Date of Birth:</span>
+                        <span class="ml-2 text-gray-600">{{ user.date_of_birth|date:"F j, Y" }}</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- End of profile card -->
+            <div class="my-4"></div>
+            <!-- Settings -->
+            <a href="{% url 'users:user_edit' user.pk %}" class="bg-blue-500 text-white w-full px-4 py-2 rounded hover:bg-blue-600">Edit Profile</a>
+            <!-- End of Settings -->
+        </div>
+        <!-- Right Side -->
+        <div class="w-full md:w-9/12 mx-2">
+            <!-- Activity -->
+            <div class="bg-white p-3 shadow-sm rounded-sm">
+                <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+                    <span clas="text-green-500">
+                        <svg class="h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 22H2v-2h10v2zm10-2v2h-10v-2h10zm0-4v2H2v-2h20zm0-8v6H2V8h20zm0-4v2H2V4h20z"/>
+                        </svg>
+                    </span>
+                    <span class="tracking-wide">Activity</span>
+                </div>
+                <div class="text-gray-700">
+                    <div class="mt-4 flex">
+                        <!-- User Activity goes here -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Activity -->
+        </div>
+    </div>
+</div>
 {% endblock %}

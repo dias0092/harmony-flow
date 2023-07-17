@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib import messages
-from .forms import UserForm, UserLoginForm, UserRegisterForm
+from .forms import UserForm, UserLoginForm, UserRegisterForm, UserEditForm
 
 User = get_user_model()
 
@@ -28,12 +28,15 @@ def user_new(request):
 def user_edit(request, pk):
     user = get_object_or_404(User, pk=pk)
     if request.method == "POST":
-        form = UserForm(request.POST, instance=user)
+        form = UserEditForm(request.POST,request.FILES, instance=user)
         if form.is_valid():
             user = form.save()
+            messages.success(request, 'Your profile was successfully updated!')
             return redirect('users:user_detail', pk=user.pk)
+        else:
+            messages.error(request, 'Please correct the error below.')
     else:
-        form = UserForm(instance=user)
+        form = UserEditForm(instance=user)
     return render(request, 'users/user_edit.html', {'form': form})
 
 def user_delete(request, pk):
