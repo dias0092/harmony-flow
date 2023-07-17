@@ -39,8 +39,14 @@
                 </a>
             </div>
             <div>
+              {% if user.is_authenticated %}
+                  <!-- Logged-in Navbar -->
+                  <a href="{% url 'users:user_detail' user.pk %}" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0">Profile</a>
+                  <a href="{% url 'users:logout' %}" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0">Logout</a>
+              {% else %}
                 <a href="{% url 'users:login' %}" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0">Sign In</a>
                 <a href="{% url 'users:register' %}" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0 ml-2">Sign Up</a>
+              {% endif %}
             </div>
         </div>
     </nav>
