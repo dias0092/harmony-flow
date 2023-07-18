@@ -1,15 +1,19 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from .models import UserSong
 from .forms import UserSongForm
 
+@login_required
 def usersong_list(request):
     usersongs = UserSong.objects.all()
     return render(request, 'user_songs/usersong_list.html', {'usersongs': usersongs})
 
+@login_required
 def usersong_detail(request, pk):
     usersong = get_object_or_404(UserSong, pk=pk)
     return render(request, 'user_songs/usersong_detail.html', {'usersong': usersong})
 
+@login_required
 def usersong_new(request):
     if request.method == "POST":
         form = UserSongForm(request.POST)
@@ -20,6 +24,7 @@ def usersong_new(request):
         form = UserSongForm()
     return render(request, 'user_songs/usersong_edit.html', {'form': form})
 
+@login_required
 def usersong_edit(request, pk):
     usersong = get_object_or_404(UserSong, pk=pk)
     if request.method == "POST":
@@ -31,6 +36,7 @@ def usersong_edit(request, pk):
         form = UserSongForm(instance=usersong)
     return render(request, 'user_songs/usersong_edit.html', {'form': form})
 
+@login_required
 def usersong_delete(request, pk):
     usersong = get_object_or_404(UserSong, pk=pk)
     if request.method == 'POST':
