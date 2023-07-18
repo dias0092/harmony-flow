@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'user_songs',
     'users',
     'core',
+    'pydub',
 ]
 
 MIDDLEWARE = [

@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Tracks</h1>
-
-<ul>
+<div class="container mx-auto p-6">
+    <h1 class="text-4xl font-bold mb-5">Tracks</h1>
     {% for track in tracks %}
-    <li>
-        <a href="{% url 'tracks:track_detail' track.pk %}">{{ track.name }}</a>
-    </li>
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg mb-4">
+        <div class="px-4 py-5 sm:px-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                <a href="{% url 'tracks:track_detail' track.pk %}" class="text-indigo-600 hover:text-indigo-900">{{ track.name }}</a>
+            </h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                Duration: {{ track.duration }}
+            </p>
+        </div>
+    </div>
     {% endfor %}
-</ul>
-
-<a href="{% url 'tracks:track_new' %}">New Track</a>
+    <a href="{% url 'tracks:track_new' %}" class="inline-block mt-4 bg-indigo-600 border border-transparent rounded-md py-2 px-3 text-base font-medium text-white hover:bg-indigo-700">New Track</a>
+</div>
 {% endblock %}
