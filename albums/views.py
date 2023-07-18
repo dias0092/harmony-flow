@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Album
+from .models import Album, Artist
+from tracks.models import Track
 from .forms import AlbumForm
-from .models import Artist
 
 def album_list(request):
     albums = Album.objects.all()
@@ -9,7 +9,8 @@ def album_list(request):
 
 def album_detail(request, pk):
     album = get_object_or_404(Album, pk=pk)
-    return render(request, 'albums/album_detail.html', {'album': album})
+    tracks = Track.objects.filter(album=album)
+    return render(request, 'albums/album_detail.html', {'album': album, 'tracks': tracks})
 
 def album_new(request):
     if request.method == "POST":

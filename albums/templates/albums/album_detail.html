@@ -14,10 +14,13 @@
             <div class="mt-8">
                 <h3 class="text-2xl font-semibold text-gray-800">Tracks:</h3>
                 <ul class="list-disc list-inside text-gray-600">
-                {% for track in album.tracks.all %}
+                {% for track in tracks %}
                     <li class="mt-2">{{ track.name }} - {{ track.duration }}</li>
+                {% empty %}
+                    <p>No tracks available for this album.</p>
                 {% endfor %}
                 </ul>
+                <a href="{% url 'albums:album_edit' album.pk %}" class="inline-block mt-4 bg-indigo-600 border border-transparent rounded-md py-2 px-3 text-base font-medium text-white hover:bg-indigo-700">Edit Album</a>
             </div>
         </div>
     </div>
