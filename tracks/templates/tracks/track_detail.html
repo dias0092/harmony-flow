@@ -4,7 +4,7 @@
 <div class="container mx-auto p-6">
     <h1 class="text-4xl font-bold mb-5">{{ track.name }}</h1>
     <p class="mb-4">Duration: {{ track.duration }}</p>
-    <a href="{% url 'tracks:track_new' track.pk %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+    <a href="{% url 'tracks:track_edit' track.pk %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
     <a href="{% url 'tracks:track_delete' track.pk %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</a>
 </div>
 {% endblock %}

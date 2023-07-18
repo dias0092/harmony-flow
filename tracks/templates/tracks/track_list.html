@@ -12,6 +12,10 @@
             <p class="mt-1 max-w-2xl text-sm text-gray-500">
                 Duration: {{ track.duration }}
             </p>
+            <audio controls>
+                <source src="{{ track.audio_file.url }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
         </div>
     </div>
     {% endfor %}
