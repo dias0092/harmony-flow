@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %} Your Songs - HarmonyFlow {% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-10">
+  <h2 class="text-6xl font-bold mb-5 text-center">Your Songs</h2>
+
+  <div class="mb-4 text-left">
+    <a href="{% url 'user_songs:usersong_new' %}" class="bg-gray-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">New Song</a>
+  </div>
+
+  {% for usersong in usersongs %}
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <h3 class="font-bold text-xl mb-2">{{ usersong.song.name }}</h3>
+      <p>By: {{ usersong.song.album.artist.name }}</p>
+      <p>From the album "{{ usersong.song.album.name }}"</p>
+      <p>Played on: {{ usersong.play_date }}</p>
+      <div class="mt-4">
+          <a href="{% url 'user_songs:usersong_edit' usersong.id %}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+          <a href="{% url 'user_songs:usersong_delete' usersong.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</a>
+      </div>
+  </div>
+  {% empty %}
+  <div class="bg-white shadow rounded p-4">
+    <p>No songs yet. Why not create one?</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
