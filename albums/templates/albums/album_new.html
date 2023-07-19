@@ -3,20 +3,21 @@
 {% block title %} New Album - HarmonyFlow {% endblock %}
 
 {% block content %}
-<div class="container mx-auto py-10">
-    <h2 class="text-4xl font-bold mb-5 text-center">Create New Album</h2>
+<div class="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto py-5">
+    <h2 class="text-4xl font-bold mb-5 text-center text-white">Create New Album</h2>
     <div class="w-full max-w-xs mx-auto">
-        <form method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" enctype="multipart/form-data">
+        <form method="POST" class=" rounded px-8 pt-6 pb-8 mb-4" enctype="multipart/form-data">
             {% csrf_token %}
+            
             {% for field in form %}
             <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ field.id_for_label }}">
+              <label class="block text-white text-sm font-bold mb-2" for="{{ field.id_for_label }}">
                 {{ field.label }} {% if field.field.required %}<span class="text-red-500">*</span>{% endif %}
               </label>
           
               {% if field.name == 'artist' %}
                 <!-- This is a select dropdown for the 'artist' field -->
-                <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="{{ field.id_for_label }}" name="{{ field.name }}">
+                <select class="rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="{{ field.id_for_label }}" name="{{ field.name }}">
                   <!-- Loop through artists and create an option for each one -->
                   {% for artist in artists %}
                     <option value="{{ artist.id }}" {% if artist.id == field.value %}selected{% endif %}>{{ artist.name }}</option>
@@ -24,13 +25,13 @@
                 </select>
               {% elif field.name == 'release_date' %}
                 <!-- This is a date input field for the 'release_date' field -->
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="{{ field.id_for_label }}" type="date" name="{{ field.name }}" value="{{ field.value|date:'Y-m-d' }}">
+                <input class="rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="{{ field.id_for_label }}" type="date" name="{{ field.name }}" value="{{ field.value|date:'Y-m-d' }}">
               {% elif field.name == 'image' %}
                 <!-- This is a file input field for the 'image' field -->
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="{{ field.id_for_label }}" type="file" name="{{ field.name }}">
+                <input class="rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="{{ field.id_for_label }}" type="file" name="{{ field.name }}">
               {% else %}
                 <!-- For other fields, use an input field as before -->
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="{{ field.id_for_label }}" type="text" placeholder="{{ field.label }}" name="{{ field.name }}" value="{{ field.value|default_if_none:'' }}">
+                <input class="rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="{{ field.id_for_label }}" type="text" placeholder="{{ field.label }}" name="{{ field.name }}" value="{{ field.value|default_if_none:'' }}">
               {% endif %}
           
               {% if field.errors %}
@@ -39,7 +40,7 @@
             </div>
             {% endfor %}
             <div class="flex items-center justify-between">
-                <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit" value="Submit">
+                <input class="bg-white hover:bg-neutral-800 text-black hover:text-white transition-colors duration-200 font-bold py-2 px-4 rounded" type="submit" value="Submit">
             </div>
         </form>
     </div>

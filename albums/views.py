@@ -18,7 +18,7 @@ def album_new(request):
         if form.is_valid():
             album = form.save(commit=False)
             album.save()
-            return redirect('albums:album_detail', pk=album.pk)
+            return redirect('albums:album_list')
     else:
         form = AlbumForm()
     artists = Artist.objects.all()
@@ -30,7 +30,7 @@ def album_edit(request, pk):
         form = AlbumForm(request.POST, request.FILES, instance=album)
         if form.is_valid():
             album = form.save()
-            return redirect('albums:album_detail', pk=album.pk)
+            return redirect('albums:album_list')
     else:
         form = AlbumForm(instance=album)
     return render(request, 'albums/album_edit.html', {'form': form})

@@ -3,24 +3,24 @@
 {% block title %} {{ album.name }} - HarmonyFlow {% endblock %}
 
 {% block content %}
-<div class="container mx-auto py-10">
-    <div class="bg-white shadow-lg rounded-lg p-8">
-        <h2 class="prose text-4xl font-bold mb-5 text-center text-gray-800">{{ album.name }}</h2>
+<div class="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto py-5">
+    <div class="bg-neutral-700 shadow-lg mx-auto max-w-xs rounded-lg p-8">
+        <h2 class="prose text-4xl font-bold mb-5 text-center text-white">{{ album.name }}</h2>
 
         <div class="mt-4 text-center">
-            <p class="text-xl text-gray-600">{{ album.artist }}</p>
-            <p class="mt-4 text-sm text-gray-500">{{ album.description }}</p>
+            <p class="text-xl text-gray-300">by {{ album.artist }}</p>
+            <p class="mt-4 text-sm text-gray-300">{{ album.description }}</p>
 
             <div class="mt-8">
-                <h3 class="text-2xl font-semibold text-gray-800">Tracks:</h3>
-                <ul class="list-disc list-inside text-gray-600">
+                <h3 class="text-2xl font-semibold text-gray-100">Tracks:</h3>
+                <ul class="list-disc list-inside text-gray-300">
                 {% for track in tracks %}
                     <li class="mt-2">{{ track.name }} - {{ track.duration }}</li>
                 {% empty %}
                     <p>No tracks available for this album.</p>
                 {% endfor %}
                 </ul>
-                <a href="{% url 'albums:album_edit' album.pk %}" class="inline-block mt-4 bg-indigo-600 border border-transparent rounded-md py-2 px-3 text-base font-medium text-white hover:bg-indigo-700">Edit Album</a>
+                <a href="{% url 'albums:album_edit' album.pk %}" class="inline-block mt-3 bg-white hover:bg-neutral-800 text-black hover:text-white transition-colors duration-200 font-bold py-2 px-4 rounded-xl">Edit Album</a>
             </div>
         </div>
     </div>

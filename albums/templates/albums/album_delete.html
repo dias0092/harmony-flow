@@ -3,12 +3,12 @@
 {% block title %} Delete Album - HarmonyFlow {% endblock %}
 
 {% block content %}
-<div class="container mx-auto py-10">
-    <h2 class="text-4xl font-bold mb-5 text-center">Delete Album</h2>
+<div class="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto py-5">
+    <h2 class="text-4xl font-bold mb-5 text-center text-white">Delete Album</h2>
     <div class="w-full max-w-xs mx-auto">
-        <form method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form method="POST" class="bg-neutral-700 shadow-md rounded px-8 pt-6 pb-8 mb-4">
             {% csrf_token %}
-            <p class="mb-4">Are you sure you want to delete the album "{{ object.name }}"?</p>
+            <p class="mb-4 text-white">Are you sure you want to delete the album "{{ object.name }}"?</p>
             <div class="flex items-center justify-between">
                 <input class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="submit" value="Yes, Delete">
                 <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="{% url 'albums:album_detail' album.id %}">
