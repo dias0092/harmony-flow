@@ -1,13 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="bg-white shadow rounded p-4">
-    <h1 class="text-4xl font-bold mb-4">{{ artist.name }}</h1>
-    {% if artist.photo %}
-      <img src="{{ artist.photo.url }}" alt="{{ artist.name }}" class="w-full object-cover rounded mb-4">
-    {% endif %}
-    <p class="text-lg mb-4">{{ artist.biography }}</p>
-    <a href="{% url 'artists:artist_edit' artist.id %}" class="text-blue-500 hover:underline">Edit</a>
-    <a href="{% url 'artists:artist_delete' artist.id %}" class="text-red-500 hover:underline">Delete</a>
+<div class="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto py-5 px-5">
+  <h1 class="text-6xl font-bold mb-5 text-center text-white">{{ artist.name }}</h1>
+  <div class="mb-4 text-left">
+    <a href="{% url 'artists:artist_list' %}" class="bg-white hover:bg-neutral-800 text-black hover:text-white transition-colors duration-200 font-bold py-2 px-4 rounded-xl">Back to Artists</a>
   </div>
+      {% if artist.photo %}
+        <img src="{{ artist.photo.url }}" alt="{{ artist.name }}" class="w-full object-cover rounded mb-4">
+      {% endif %}
+      <p class="text-white text-lg mb-4">{{ artist.biography }}</p>
+      <h2 class="text-4xl font-bold mb-2 text-white">Tracks:</h2>
+      <ul class="list-disc list-inside text-white">
+        {% for track in artist.tracks.all %}
+          <li>{{ track.title }}</li>
+        {% empty %}
+          <li>No tracks found for this artist.</li>
+        {% endfor %}
+      </ul>
+      <div class="flex justify-between items-center mt-4">
+        <a href="{% url 'artists:artist_edit' artist.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+        <a href="{% url 'artists:artist_delete' artist.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</a>
+      </div>
+</div>
 {% endblock %}

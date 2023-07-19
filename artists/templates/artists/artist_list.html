@@ -1,26 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mx-auto py-10">
-  <h1 class="text-6xl font-bold mb-5 text-center">Artists</h1>
+<div class="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto py-5 px-5">
+  <h1 class="text-6xl font-bold mb-5 text-center text-white">Artists</h1>
   <div class="mb-4 text-left">
-    <a href="{% url 'artists:artist_new' %}" class="bg-gray-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add New Artist</a>
+    <a href="{% url 'artists:artist_new' %}" class="bg-white hover:bg-neutral-800 text-black hover:text-white transition-colors duration-200 font-bold py-2 px-4 rounded-xl">Add New Artist</a>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
     {% for artist in artists %}
-      <div class="bg-white shadow rounded p-4">
-        <h2 class="font-bold text-xl mb-2">{{ artist.name }}</h2>
+      <div class="bg-neutral-800 shadow rounded p-4">
+        <h2 class="font-bold text-xl mb-2 text-white">{{ artist.name }}</h2>
         {% if artist.photo %}
           <img src="{{ artist.photo.url }}" alt="{{ artist.name }}" class="w-full object-cover rounded mb-4">
         {% endif %}
         <p class="mb-2">{{ artist.biography|truncatewords:30 }}</p>
         <div class="flex justify-between items-center mt-4">
-          <a href="{% url 'artists:artist_detail' artist.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View Details</a>
+          <a href="{% url 'artists:artist_detail' artist.id %}" class="bg-neutral-500 hover:bg-neutral-700 text-white font-bold py-2 px-4 rounded">View Details</a>
           <div class="inline-flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-1">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l-9 5 9 5 9-5-9-5z"></path>
-            </svg>
             {{ artist.song_set.count }}
           </div>
         </div>
