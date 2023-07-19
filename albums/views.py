@@ -27,10 +27,9 @@ def album_new(request):
 def album_edit(request, pk):
     album = get_object_or_404(Album, pk=pk)
     if request.method == "POST":
-        form = AlbumForm(request.POST, instance=album)
+        form = AlbumForm(request.POST, request.FILES, instance=album)
         if form.is_valid():
-            album = form.save(commit=False)
-            album.save()
+            album = form.save()
             return redirect('albums:album_detail', pk=album.pk)
     else:
         form = AlbumForm(instance=album)

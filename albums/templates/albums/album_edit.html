@@ -4,9 +4,9 @@
 
 {% block content %}
 <div class="container mx-auto py-10">
-    <h2 class="text-6xl font-bold mb-5 text-center">Edit Album</h2>
+    <h2 class="text-6xl font-bold mb-5 text-center text-white">Edit Album</h2>
     <div class="w-full max-w-s mx-auto">
-        <form method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" enctype="multipart/form-data">
             {% csrf_token %}
 
             {% for field in form %}
@@ -14,8 +14,23 @@
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ field.id_for_label }}">
                         {{ field.label }} {% if field.field.required %}<span class="text-red-500">*</span>{% endif %}
                     </label>
-                     
+                    {% if field.name == 'release_date' %}
+                    <!-- This is a date input field for the 'release_date' field -->
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="{{ field.id_for_label }}" type="date" name="{{ field.name }}" value="{{ field.value|date:'Y-m-d' }}">
+                    {% elif field.name == 'image' %}
+                    <!-- This is a file input field for the 'image' field -->
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="{{ field.id_for_label }}" type="file" name="{{ field.name }}" accept="image/png, image/jpeg">
+                    {% elif field.name == 'artist' %}
+                    <!-- This is a select input field for the 'artist' field -->
+                    <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="{{ field.id_for_label }}" name="{{ field.name }}">
+                        {% for artist in field.field.queryset %}
+                            <option value="{{ artist.id }}" {% if field.value == artist.id %}selected{% endif %}>{{ artist.name }}</option>
+                        {% endfor %}
+                    </select>
+                    {% else %}
+                    <!-- For other fields, use an input field as before -->
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="{{ field.id_for_label }}" type="text" placeholder="{{ field.label }}" name="{{ field.name }}" value="{{ field.value|default_if_none:'' }}">
+                    {% endif %}
 
                     {% if field.errors %}
                     <p class="text-red-500 text-xs italic">{{ field.errors.0 }}</p>

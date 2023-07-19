@@ -1,30 +1,37 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %} Albums - HarmonyFlow {% endblock %}
 
 {% block content %}
-<div class="container mx-auto py-10">
-  <h2 class="text-6xl font-bold mb-5 text-center">Albums</h2>
+<div class="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto py-5">
+  <h2 class="text-6xl font-bold mb-5 text-center text-white">Albums</h2>
 
-  <div class="mb-4 text-left">
-    <a href="{% url 'albums:album_new' %}" class="bg-gray-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">New Album</a>
+  <div class="mb-4 ml-4 text-left">
+    <a href="{% url 'albums:album_new' %}" class="bg-white hover:bg-neutral-900 text-neutral-900 hover:text-white font-bold py-2 px-4 rounded transition-colors duration-200 mt-4 lg:mt-0">New Album</a>
   </div>
 
-  {% for album in albums %}
-  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <h3 class="font-bold text-xl mb-2">{{ album.name }}</h3>
-      <p class="text-gray-700 text-base">{{ album.artist }}</p>
-      <p class="text-gray-700 text-sm">Release date: {{ album.release_date }}</p>
-      <div class="mt-4">
-          <a href="{% url 'albums:album_detail' album.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View</a>
-          <a href="{% url 'albums:album_edit' album.id %}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Edit</a>
-          <a href="{% url 'albums:album_delete' album.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</a>
-      </div>
+  <div class="flex overflow-x-auto pb-10 hide-scrollbar">
+    {% for album in albums %}
+    <div class="bg-neutral-800 shadow-md rounded-xl px-3 pt-3 pb-5 mb-4 mx-4 flex-shrink-0">
+        {% if album.image %}
+          <img src="{{ album.image.url }}" alt="{{ album.name }}'s cover image" class="rounded-xl">
+        {% else %}
+          <img src="{% static 'img/default-album.jpg' %}" alt="default album cover" class="rounded-xl">
+        {% endif %}
+        <h3 class="font-bold text-xl text-white mb-2">{{ album.name }}</h3>
+        <p class="text-gray-300 text-base">{{ album.artist }}</p>
+        <p class="text-gray-300 text-sm">Release date: {{ album.release_date }}</p>
+        <div class="mt-4">
+            <a href="{% url 'albums:album_detail' album.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View</a>
+            <a href="{% url 'albums:album_edit' album.id %}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+            <a href="{% url 'albums:album_delete' album.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="bg-white shadow rounded p-4">
+      <p>No albums yet.</p>
+    </div>
+    {% endfor %}
   </div>
-  {% empty %}
-  <div class="bg-white shadow rounded p-4">
-    <p>No albums yet.</p>
-  </div>
-  {% endfor %}
 </div>
 {% endblock %}
