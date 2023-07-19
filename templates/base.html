@@ -7,56 +7,61 @@
     <!-- Include Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex flex-col min-h-screen">
-    <nav class="flex items-center justify-between flex-wrap bg-gray-900 p-6">
-        <div class="flex items-center flex-shrink-0 text-white mr-6">
-            <span class="font-semibold text-xl tracking-tight">Harmony Flow</span>
+<body class="flex min-h-screen bg-black">
+    <aside class="hidden md:flex flex-col gap-y-2 bg-black h-full w-[300px] p-2" style="height: 100vh;">
+      <div class="bg-neutral-900 rounded-lg flex flex-col justify-between h-full">
+        <div class="flex flex-col gap-y-4 px-5 py-4">
+            
+            <!-- Home Link -->
+            <a class="flex flex-row h-auto items-center w-full gap-x-4 text-md font-medium cursor-pointer hover:text-white transition py-1 text-white" href="{% url 'home' %}">
+                <!-- SVG icon for Home -->
+                <p class="truncate w-100">Home</p>
+            </a>
+            <!-- Search Link -->
+            <a class="flex flex-row h-auto items-center w-full gap-x-4 text-md font-medium cursor-pointer hover:text-white transition text-neutral-400 py-1" href="#">
+                <!-- SVG icon for Search -->
+                <p class="truncate w-100">Search</p>
+            </a>
+            <a class="flex flex-row h-auto items-center w-full gap-x-4 text-md font-medium cursor-pointer hover:text-white transition text-neutral-400 py-1" href="{% url 'albums:album_list' %}">
+              <!-- SVG icon for Search -->
+              <p class="truncate w-100">Albums</p>
+            </a>
+            <a class="flex flex-row h-auto items-center w-full gap-x-4 text-md font-medium cursor-pointer hover:text-white transition text-neutral-400 py-1" href="{% url 'artists:artist_list' %}">
+              <!-- SVG icon for Search -->
+              <p class="truncate w-100">Artists</p>
+            </a>
+            <a class="flex flex-row h-auto items-center w-full gap-x-4 text-md font-medium cursor-pointer hover:text-white transition text-neutral-400 py-1" href="{% url 'playlists:playlist_list' %}">
+              <!-- SVG icon for Search -->
+              <p class="truncate w-100">Playlists</p>
+            </a>
+            <a class="flex flex-row h-auto items-center w-full gap-x-4 text-md font-medium cursor-pointer hover:text-white transition text-neutral-400 py-1" href="{% url 'tracks:track_list' %}">
+              <!-- SVG icon for Search -->
+              <p class="truncate w-100">Tracks</p>
+            </a>
+            <a class="flex flex-row h-auto items-center w-full gap-x-4 text-md font-medium cursor-pointer hover:text-white transition text-neutral-400 py-1" href="{% url 'user_songs:usersong_list' %}">
+              <!-- SVG icon for Search -->
+              <p class="truncate w-100">User Songs</p>
+            </a>
         </div>
-        <div class="block lg:hidden">
-            <button class="flex items-center px-3 py-2 border rounded text-gray-300 border-gray-400 hover:text-white hover:border-white">
-                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v15z"/></svg>
-            </button>
+        <div class="flex justify-end space-x-2 pr-4 pb-4">
+          {% if user.is_authenticated %}
+              <!-- Logged-in Navbar -->
+              <a href="{% url 'users:user_detail' user.pk %}" class="inline-block text-sm px-4 py-2 rounded-xl text-black bg-white hover:text-white hover:bg-neutral-900 duration-200 mt-4 lg:mt-0">Profile</a>
+              <a href="{% url 'users:logout' %}" class="inline-block text-sm px-4 py-2 rounded-xl text-black bg-white hover:text-white hover:bg-neutral-900 duration-200 mt-4 lg:mt-0">Logout</a>
+          {% else %}
+            <a href="{% url 'users:login' %}" class="inline-block text-sm px-4 py-2 rounded-xl text-black bg-white hover:text-white hover:bg-neutral-900 duration-200 mt-4 lg:mt-0">Sign In</a>
+            <a href="{% url 'users:register' %}" class="inline-block text-sm px-4 py-2 rounded-xl text-black bg-white hover:text-white hover:bg-neutral-900 transition-colors duration-200 mt-4 lg:mt-0">Sign Up</a>
+          {% endif %}
         </div>
-        <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-            <div class="text-sm lg:flex-grow">
-                <a href="{% url 'home' %}" class="block mt-4 lg:inline-block lg:mt-0 text-gray-500 hover:text-white mr-4">
-                  Home
-                </a>
-                <a href="{% url 'albums:album_list' %}" class="block mt-4 lg:inline-block lg:mt-0 text-gray-500 hover:text-white mr-4">
-                  Albums
-                </a>
-                <a href="{% url 'artists:artist_list' %}" class="block mt-4 lg:inline-block lg:mt-0 text-gray-500 hover:text-white mr-4">
-                  Artists
-                </a>
-                <a href="{% url 'playlists:playlist_list' %}" class="block mt-4 lg:inline-block lg:mt-0 text-gray-500 hover:text-white mr-4">
-                  Playlists
-                </a>
-                <a href="{% url 'tracks:track_list' %}" class="block mt-4 lg:inline-block lg:mt-0 text-gray-500 hover:text-white mr-4">
-                  Tracks
-                </a>
-                <a href="{% url 'user_songs:usersong_list' %}" class="block mt-4 lg:inline-block lg:mt-0 text-gray-500 hover:text-white mr-4">
-                  User Songs
-                </a>
-            </div>
-            <div>
-              {% if user.is_authenticated %}
-                  <!-- Logged-in Navbar -->
-                  <a href="{% url 'users:user_detail' user.pk %}" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0">Profile</a>
-                  <a href="{% url 'users:logout' %}" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0">Logout</a>
-              {% else %}
-                <a href="{% url 'users:login' %}" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0">Sign In</a>
-                <a href="{% url 'users:register' %}" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0 ml-2">Sign Up</a>
-              {% endif %}
-            </div>
-        </div>
-    </nav>
+      </div>
+    </aside>
 
     <!-- Content -->
-    <div class="container mx-auto mt-10 flex-grow">
+    <div class="h-full flex-1 overflow-y-auto py-2">
         {% block content %}
-        <div class="container mx-auto py-10">
-          <h2 class="text-6xl font-bold mb-5 text-center">Welcome to HarmonyFlow</h2>
-          <p class="text-center text-xl">A platform where you can explore the world of music, find your favorite tracks, and track your music journey. Let's get started!</p>
+        <div class="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto py-5">
+          <h2 class="text-6xl font-bold mb-5 text-center text-white">Welcome to HarmonyFlow</h2>
+          <p class="text-center text-xl text-white">A platform where you can explore the world of music, find your favorite tracks, and track your music journey. Let's get started!</p>
           <div class="mt-10 text-center">
             <a href="{% url 'albums:album_list' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Browse Albums</a>
             {% if user.is_authenticated %}
@@ -69,11 +74,5 @@
         {% endblock %}
     </div>
 
-    <!-- Footer -->
-    <footer class="footer bg-gray-900 mt-auto">
-        <div class="container mx-auto text-white text-center p-6">
-            Harmony Flow © 2023
-        </div>
-    </footer>
 </body>
 </html>
