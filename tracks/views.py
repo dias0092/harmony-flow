@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Track
+from artists.models import Artist
 from .forms import TrackForm
 from pydub import AudioSegment
 from pydub.exceptions import CouldntDecodeError
@@ -29,12 +30,13 @@ def track_new(request):
                     track.duration = int(audio.info.length)
                 except Exception as e:
                     form.add_error('audio_file', f'Invalid audio file: {e}')
-                    return render(request, 'tracks/track_edit.html', {'form': form})
+                    return render(request, 'tracks/track_new.html', {'form': form})
             track.save()
             return redirect('tracks:track_detail', pk=track.pk)
     else:
         form = TrackForm()
-    return render(request, 'tracks/track_edit.html', {'form': form})
+    artists = Artist.objects.all()
+    return render(request, 'tracks/track_new.html', {'form': form, 'artists': artists})
 
 def track_edit(request, pk):
     track = get_object_or_404(Track, pk=pk)
@@ -48,7 +50,8 @@ def track_edit(request, pk):
             return redirect('tracks:track_detail', pk=track.pk)
     else:
         form = TrackForm(instance=track)
-    return render(request, 'tracks/track_edit.html', {'form': form})
+    artists = Artist.objects.all()
+    return render(request, 'tracks/track_edit.html', {'form': form, 'artists': artists})
 
 def track_delete(request, pk):
     track = get_object_or_404(Track, pk=pk)
