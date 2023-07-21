@@ -6,7 +6,7 @@ from .validators import validate_is_audio
 
 class Track(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, related_name='tracks', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     duration = models.IntegerField(null=True, blank=True)
     audio_file = models.FileField(upload_to='static/tracks/', validators=[validate_is_audio])

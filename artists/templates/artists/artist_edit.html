@@ -1,46 +1,36 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% block title %} Edit Artist - HarmonyFlow {% endblock %}
 
 {% block content %}
-<div class="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto py-5 px-5">
-  <h1 class="text-6xl font-bold mb-5 text-center text-white">Edit Artist</h1>
-  <div class="mb-4 text-left">
-    <a href="{% url 'artists:artist_list' %}" class="bg-white hover:bg-neutral-800 text-black hover:text-white transition-colors duration-200 font-bold py-2 px-4 rounded-xl">Back to Artists</a>
-  </div>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <div class="bg-neutral-800 shadow rounded p-4">
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% for field in form %}
-          <div class="mb-4">
-            <label class="block text-white text-sm font-bold mb-2" for="{{ field.id_for_label }}">
-              {{ field.label }}
-            </label>
-            {% if field.name == 'photo' %}
-              <!-- This is a file input field for the 'photo' field -->
-              <div class="flex items-center justify-between">
-                  <label class="border-b border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white py-2 px-4 rounded cursor-pointer">
-                      Select File
-                      <input class="hidden" id="{{ field.id_for_label }}" type="file" name="{{ field.name }}">
-                  </label>
-                  <span id="selected-file" class="text-gray-600 ml-3"></span>
-              </div>
-            {% else %}
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                id="{{ field.id_for_label }}" 
-                type="{{ field.field.widget.input_type }}" 
-                placeholder="{{ field.label }}" 
-                name="{{ field.name }}" 
-                value="{{ field.value|default_if_none:'' }}">
-            {% endif %}
-            {% if field.errors %}
-              <p class="text-red-500 text-xs italic">{{ field.errors.0 }}</p>
-            {% endif %}
-          </div>
-        {% endfor %}
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Update Artist</button>
-      </form>
-    </div>
-  </div>
-</div>
+<div class="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto py-5">
+    <h2 class="text-4xl font-bold mb-5 text-center text-white">Edit Artist</h2>
+    <div class="w-full max-w-xs mx-auto">
+        <form method="POST" class="rounded px-8 pt-6 pb-8 mb-4" enctype="multipart/form-data">
+            {% csrf_token %}
 
+            {% for field in form %}
+                <div class="mb-4">
+                    <label class="block text-white text-sm font-bold mb-2" for="{{ field.id_for_label }}">
+                        {{ field.label }} {% if field.field.required %}<span class="text-red-500">*</span>{% endif %}
+                    </label>
+                    {% if field.name == 'image' %}
+                    <!-- This is a file input field for the 'image' field -->
+                    <input class="rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="{{ field.id_for_label }}" type="file" name="{{ field.name }}" accept="image/png, image/jpeg">
+                    {% else %}
+                    <!-- For other fields, use an input field as before -->
+                    <input class="rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="{{ field.id_for_label }}" type="text" placeholder="{{ field.label }}" name="{{ field.name }}" value="{{ field.value|default_if_none:'' }}">
+                    {% endif %}
+
+                    {% if field.errors %}
+                    <p class="text-red-500 text-xs italic">{{ field.errors.0 }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <div class="flex items-center justify-between">
+                <input class="bg-white hover:bg-neutral-800 text-black hover:text-white transition-colors duration-200 font-bold py-2 px-4 rounded-xl" type="submit" value="Update">
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

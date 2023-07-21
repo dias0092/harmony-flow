@@ -13,9 +13,9 @@
       <h2 class="text-4xl font-bold mb-2 text-white">Tracks:</h2>
       <ul class="list-disc list-inside text-white">
         {% for track in artist.tracks.all %}
-          <li>{{ track.title }}</li>
+            <li>{{ track.name }}</li>
         {% empty %}
-          <li>No tracks found for this artist.</li>
+            <li>No tracks found for this artist.</li>
         {% endfor %}
       </ul>
       <div class="flex justify-between items-center mt-4">
