@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto py-5 px-5">
-    <h1 class="text-4xl font-bold  text-white">Tracks</h1>
+    <h1 class="text-4xl font-bold text-white">Tracks</h1>
     <a href="{% url 'tracks:track_new' %}" class="inline-block mt-4 mb-5 bg-indigo-600 border border-transparent rounded-md py-2 px-3 text-base font-medium text-white hover:bg-indigo-700">New Track</a>
     <div class="flex flex-col gap-y-2 w-full px-6">
         {% for track in tracks %}
