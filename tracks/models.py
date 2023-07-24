@@ -9,7 +9,7 @@ class Track(models.Model):
     artist = models.ForeignKey(Artist, related_name='tracks', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     duration = models.IntegerField(null=True, blank=True)
-    audio_file = models.FileField(upload_to='static/tracks/', validators=[validate_is_audio])
+    audio_file = models.FileField(upload_to='tracks/', validators=[validate_is_audio])
 
     def __str__(self):
         return self.name

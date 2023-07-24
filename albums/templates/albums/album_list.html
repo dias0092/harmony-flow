@@ -14,9 +14,9 @@
     {% for album in albums %}
     <div class="bg-neutral-800 hover:bg-neutral-700 transition-colors duration-200 rounded-xl px-3 pt-3 pb-5 mb-4 mx-4 flex-shrink-0">
         {% if album.image %}
-          <img src="{{ album.image.url }}" alt="{{ album.name }}'s cover image" class="rounded-xl" width="250" height="250">
+          <img src="{{ album.image.url }}" alt="{{ album.name }}'s cover image" class="rounded-xl object-center w-64 h-64" >
         {% else %}
-          <img src="{% static 'img/default-album.jpg' %}" alt="default album cover" class="rounded-xl" width="250" height="250">
+          <img src="{% static 'img/default-album.jpg' %}" alt="default album cover" class="rounded-xl w-64 h-64">
         {% endif %}
         <h3 class="font-bold text-xl text-white mt-2 mb-2">{{ album.name }}</h3>
         <p class="text-gray-300 text-base">by {{ album.artist }}</p>

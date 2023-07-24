@@ -8,7 +8,7 @@
         {% for track in tracks %}
             <div class="flex items-center gap-x-4 w-full">
                 <div class="flex-1">
-                    <a onclick="playTrack('{{ track.audio_file.url }}', '{{ track.name }}', '{{ track.artist.name }}')" class="flex items-center gap-x-3 cursor-pointer hover:bg-neutral-800/50 w-full p-2 rounded-md">
+                    <a onclick="playTrack('{{ track.audio_file.url|urlencode }}', '{{ track.name }}', '{{ track.artist.name }}')" class="flex items-center gap-x-3 cursor-pointer hover:bg-neutral-800/50 w-full p-2 rounded-md">
                         <div class="relative rounded-md max-h-[48px] max-w-[48px] overflow-hidden">
                             <img alt="{{ track.name }}" class="object-cover" src="{% static 'img/default-album.jpg' %}">
                         </div>
