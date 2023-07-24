@@ -14,7 +14,7 @@ def album_detail(request, pk):
 
 def album_new(request):
     if request.method == "POST":
-        form = AlbumForm(request.POST)
+        form = AlbumForm(request.POST, request.FILES)
         if form.is_valid():
             album = form.save(commit=False)
             album.save()
