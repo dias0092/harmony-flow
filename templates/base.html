@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +8,7 @@
     <title>{% block title %}HarmonyFlow{% endblock %}</title>
     <!-- Include Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
 </head>
 <body class="flex min-h-screen bg-black">
     <aside class="hidden md:flex flex-col gap-y-2 bg-black h-full w-[300px] p-2" style="height: 100vh;">
@@ -72,6 +75,37 @@
           </div>
         </div>
         {% endblock %}
+    </div>
+  
+
+    <!-- Audio Player -->
+    <div class="fixed inset-x-0 bottom-0 bg-neutral-900 text-white py-4 shadow-lg">
+      <div class="container mx-auto flex items-center justify-between">
+        <div id="track-info" class="flex items-center">
+          <img id="album-art" class="h-12 w-12 object-cover rounded mr-4" src="{% static 'img/default-album.jpg' %}" alt="Album Art">
+          <div>
+            <h2 id="track-title" class="font-semibold text-lg">Track Title</h2>
+            <p id="artist-name" class="text-gray-400">Artist Name</p>
+          </div>
+        </div>
+        
+        <div class="flex items-center justify-center space-x-4">
+          <button id="play-pause-button" class="focus:outline-none">
+            <svg id="play-icon" class="h-6 w-6 fill-current text-white" viewBox="0 0 20 20">
+              <path d="M5 3l14 9-14 9V3z"></path>
+            </svg>
+            <svg id="pause-icon" class="hidden h-6 w-6 fill-current text-white" viewBox="0 0 20 20">
+              <path d="M5 3h4v14H5V3zm6 0h4v14h-4V3z"></path>
+            </svg>
+          </button>
+          <input id="audio-slider" class="appearance-none bg-gray-300 h-1 rounded-full w-64" type="range" min="0" max="100" value="0">
+          <div id="time-display" class="text-white">0:00 / 0:00</div>
+        </div>
+    
+        <audio id="audio-player" class="hidden">
+          <source src="" type="audio/mpeg">
+        </audio>
+      </div>
     </div>
 
 </body>
