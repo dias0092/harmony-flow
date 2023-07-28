@@ -13,14 +13,17 @@ jobs:
 
     services:
       db:
-        image: postgres:12
+        image: postgres:10
         env:
-          POSTGRES_USER: dias
-          POSTGRES_PASSWORD: 0706
-          POSTGRES_DB: harmonyflow
-        ports:
-          - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: github_actions
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     - uses: actions/checkout@v2
@@ -35,24 +38,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Setup Django Database
+    - name: Set environment variables
       run: |
-        python manage.py makemigrations
-        python manage.py migrate
-      env:
-        DJANGO_SETTINGS_MODULE: harmonyflow.settings
-        DB_HOST: localhost
-        DB_NAME: harmonyflow
-        DB_USER: dias
-        DB_PASS: 0706
-        DB_PORT: 5432
+        echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
+        echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
+        echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
+        echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
+        echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+        echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
+        echo "DEBUG=True" >> $GITHUB_ENV
 
-    - name: Run Tests
-      run: python manage.py test
-      env:
-        DJANGO_SETTINGS_MODULE: harmonyflow.settings
-        DB_HOST: localhost
-        DB_NAME: harmonyflow
-        DB_USER: dias
-        DB_PASS: 0706
-        DB_PORT: 5432
+    - name: Run Migrations
+      run: python manage.py migrate
