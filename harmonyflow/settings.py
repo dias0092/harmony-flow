@@ -87,15 +87,16 @@ WSGI_APPLICATION = 'harmonyflow.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-        'default': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'harmonyflow',
         'USER': 'dias',
         'PASSWORD': '0706',
-        'HOST': 'localhost',
+        'HOST': '52.188.62.42',
         'PORT': '',
     }
 }
+
 
 
 # Password validation
