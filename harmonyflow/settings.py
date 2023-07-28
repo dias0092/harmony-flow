@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': 'harmonyflow',
         'USER': 'dias',
         'PASSWORD': '0706',
-        'HOST': '52.188.62.42',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
