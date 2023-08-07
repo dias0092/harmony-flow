@@ -9,3 +9,6 @@ psycopg2-binary==2.9.6
 pydub==0.25.1
 sqlparse==0.4.4
 typing-extensions==4.7.1
+django-storages==1.13.2
+azure-storage-blob==12.17.0
+psycopg2-binary==2.9.6
