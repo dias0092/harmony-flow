@@ -21,7 +21,10 @@ AZURE_ACCOUNT_KEY ='hqqvq07uvLBTEmL4AFjsNTmUNeYkBC5Qx4AhFmK0fbNSFd44e9K489cv5ANk
 AZURE_CONTAINER ='audios'
 AZURE_SSL =True
 
-DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+DEFAULT_FILE_STORAGE = 'harmonyflow.storage_backends.AzureMediaStorage'
+
+STATICFILES_STORAGE = 'harmonyflow.storage_backends.AzureMediaStorage'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 

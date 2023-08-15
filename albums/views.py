@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Album, Artist
 from tracks.models import Track
 from .forms import AlbumForm
+from harmonyflow.storage_backends import AzureMediaStorage
 
 def album_list(request):
     albums = Album.objects.all()
