@@ -19,7 +19,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 AZURE_ACCOUNT_NAME ='harmonyflowstorage'
 AZURE_ACCOUNT_KEY ='hqqvq07uvLBTEmL4AFjsNTmUNeYkBC5Qx4AhFmK0fbNSFd44e9K489cv5ANkVzala9SWBm/xJ0bb+AStdPlbRQ=='
 AZURE_CONTAINER ='audios'
-AZURE_SSL =False
+AZURE_SSL =True
+
+DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
